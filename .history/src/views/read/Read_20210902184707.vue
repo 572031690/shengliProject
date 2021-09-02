@@ -1,7 +1,10 @@
 <template>
   <div id="article">
-    <div v-html="htmltext" class="centerBody"></div>
-
+    <button @click="saveEdit"> 保存</button>
+    <p>用 JS 设置的内容</p><p>追加的内容</p>
+    <div id="toolbar-container" class="toolbar"></div>
+    <!-- <p>------ 我是分割线 ------</p> -->
+    <!-- <div id="text-container" class="text"></div> -->
   </div>
 </template>
 
@@ -17,12 +20,11 @@ export default {
   },
   data() {
     return{
-      htmltext:'<p>用 JS 设置的内容</p><p>追加的内容</p>',
-
+      editor:''
     }
   },
   mounted() {
-    this.getEdits()
+    this.getEdit()
   },
   methods: {
     getEdit() {
@@ -37,24 +39,26 @@ export default {
         console.log(this.editor.txt.html());
 
     },
-    async getEdits() {
-      var params = {
-        pageNum :1,
-        pageSize :10
+    async saveEdit() {
+      const edt = this.editor.txt.html()
+      var data = {
+        id:1,
+        sortId: 1,
+        title: null,
+        fileUrl: null,
+        faceUrl: null,
+        author: "shell",
+        content:edt,
+        createTime: "2021-08-30T16:00:00.000+00:00",
+        updateTime: "2021-08-30T16:00:00.000+00:00",
+        status: 1
        }
       // $ajax请求
-      const url = '/essay/getEssayList'
-      await this.$ajax.get(url, {params}).then(res => {
+      const url = '/essay/updateOrInsertEssay'
+      await this.$ajax.post(url, data).then(res => {
         const { data } = res
-        // console.log(res);
-        if (data.code === "000000") {
-          this.$message.success('请求成功')
-          var text = ''
-          data.data.results.forEach(item => {
-            text +=item.content
-          })
-          this.htmltext = text
-          console.log(text);
+        if (data.code === '101') {
+          this.$message.success('暂无权限')
         } else {
           this.$message.error('暂无权限')
         }
@@ -62,19 +66,20 @@ export default {
        this.$message.error('网络异常')
       })
     }
+  },
+   beforeDestroy() {
+    // 销毁编辑器
+    this.editor.destroy()
+    this.editor = null
+
   }
 };
 </script>
 
 <style scoped>
 #article {
-  width: 100%;
   margin-top: 100px;
   margin-bottom: 20px;
-}
-.centerBody{
-  width: 500px;
-  margin: 0 auto;
 }
 /* table 样式 */
 table {

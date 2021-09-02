@@ -2,6 +2,7 @@
   <div id="article">
     <div v-html="htmltext" class="centerBody"></div>
 
+    <i>2463413</i>
   </div>
 </template>
 
@@ -17,8 +18,8 @@ export default {
   },
   data() {
     return{
-      htmltext:'<p>用 JS 设置的内容</p><p>追加的内容</p>',
-
+      editor:'',
+      htmltext:'<p>用 JS 设置的内容</p><p>追加的内容</p>'
     }
   },
   mounted() {

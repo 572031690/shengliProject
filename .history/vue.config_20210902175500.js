@@ -11,16 +11,6 @@ module.exports = {
       }
     }
   },
-  devServer: {
-    proxy:{
-      '/api':{
-        target: 'http://10.1.2.85:8091/',
-        changeOrigin: true,
-        pathRewrite: { '^/api': '' }
-      }
-    }
-  }
-
 
 
 }

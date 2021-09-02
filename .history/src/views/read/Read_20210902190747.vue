@@ -1,7 +1,6 @@
 <template>
   <div id="article">
-    <div v-html="htmltext" class="centerBody"></div>
-
+    <div v-html="htmltext"></div>
   </div>
 </template>
 
@@ -17,8 +16,8 @@ export default {
   },
   data() {
     return{
-      htmltext:'<p>用 JS 设置的内容</p><p>追加的内容</p>',
-
+      editor:'',
+      htmltext:'<p>用 JS 设置的内容</p><p>追加的内容</p>'
     }
   },
   mounted() {
@@ -46,15 +45,9 @@ export default {
       const url = '/essay/getEssayList'
       await this.$ajax.get(url, {params}).then(res => {
         const { data } = res
-        // console.log(res);
-        if (data.code === "000000") {
-          this.$message.success('请求成功')
-          var text = ''
-          data.data.results.forEach(item => {
-            text +=item.content
-          })
-          this.htmltext = text
-          console.log(text);
+        console.log(res);
+        if (data.code === '101') {
+          this.$message.success('暂无权限')
         } else {
           this.$message.error('暂无权限')
         }
@@ -68,13 +61,8 @@ export default {
 
 <style scoped>
 #article {
-  width: 100%;
   margin-top: 100px;
   margin-bottom: 20px;
-}
-.centerBody{
-  width: 500px;
-  margin: 0 auto;
 }
 /* table 样式 */
 table {

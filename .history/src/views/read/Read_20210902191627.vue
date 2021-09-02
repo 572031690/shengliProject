@@ -1,7 +1,6 @@
 <template>
   <div id="article">
-    <div v-html="htmltext" class="centerBody"></div>
-
+    <div v-html="htmltext"></div>
   </div>
 </template>
 
@@ -17,8 +16,8 @@ export default {
   },
   data() {
     return{
-      htmltext:'<p>用 JS 设置的内容</p><p>追加的内容</p>',
-
+      editor:'',
+      htmltext:'<p>用 JS 设置的内容</p><p>追加的内容</p>'
     }
   },
   mounted() {
@@ -68,13 +67,8 @@ export default {
 
 <style scoped>
 #article {
-  width: 100%;
   margin-top: 100px;
   margin-bottom: 20px;
-}
-.centerBody{
-  width: 500px;
-  margin: 0 auto;
 }
 /* table 样式 */
 table {

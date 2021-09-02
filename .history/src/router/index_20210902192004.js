@@ -24,8 +24,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/auther',
-    component: Auther
+    path: 'auther',
+    name: 'Auther',
+    component: Autherome
   },
   // {
   //   path: '/home',

@@ -1,7 +1,7 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Auther from '../views/author/authors.vue'
+
 
 const Home = () => import('../views/home/Home')
 
@@ -22,10 +22,6 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
-  },
-  {
-    path: '/auther',
-    component: Auther
   },
   // {
   //   path: '/home',

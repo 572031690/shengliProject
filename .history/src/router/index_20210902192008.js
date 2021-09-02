@@ -24,7 +24,8 @@ const routes = [
     component: Home
   },
   {
-    path: '/auther',
+    path: 'auther',
+    name: 'Auther',
     component: Auther
   },
   // {

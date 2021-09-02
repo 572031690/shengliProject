@@ -17,8 +17,8 @@ export default {
   },
   data() {
     return{
-      htmltext:'<p>用 JS 设置的内容</p><p>追加的内容</p>',
-
+      editor:'',
+      htmltext:'<p>用 JS 设置的内容</p><p>追加的内容</p>'
     }
   },
   mounted() {

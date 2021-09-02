@@ -1,7 +1,6 @@
 <template>
   <div id="article">
-    <div v-html="htmltext" class="centerBody"></div>
-
+    <div v-html="htmltext"></div>
   </div>
 </template>
 
@@ -17,8 +16,8 @@ export default {
   },
   data() {
     return{
-      htmltext:'<p>用 JS 设置的内容</p><p>追加的内容</p>',
-
+      editor:'',
+      htmltext:'<p>用 JS 设置的内容</p><p>追加的内容</p>'
     }
   },
   mounted() {
@@ -44,17 +43,12 @@ export default {
        }
       // $ajax请求
       const url = '/essay/getEssayList'
-      await this.$ajax.get(url, {params}).then(res => {
+      await this.$ajax.get(url, {pageNum :1,
+        pageSize :10}).then(res => {
+        console.log(res);
         const { data } = res
-        // console.log(res);
-        if (data.code === "000000") {
-          this.$message.success('请求成功')
-          var text = ''
-          data.data.results.forEach(item => {
-            text +=item.content
-          })
-          this.htmltext = text
-          console.log(text);
+        if (data.code === '101') {
+          this.$message.success('暂无权限')
         } else {
           this.$message.error('暂无权限')
         }
@@ -62,19 +56,20 @@ export default {
        this.$message.error('网络异常')
       })
     }
+  },
+   beforeDestroy() {
+    // 销毁编辑器
+    this.editor.destroy()
+    this.editor = null
+
   }
 };
 </script>
 
 <style scoped>
 #article {
-  width: 100%;
   margin-top: 100px;
   margin-bottom: 20px;
-}
-.centerBody{
-  width: 500px;
-  margin: 0 auto;
 }
 /* table 样式 */
 table {
