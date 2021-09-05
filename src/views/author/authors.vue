@@ -17,22 +17,22 @@
         <input
           type="text"
           class="titleInput"
-          placeholder="请输入标题"
-          v-model="title"
+          placeholder="点击输入标题"
+          v-model="addForm.title"
         />
         <br />
         <br />
         <input
           type="text"
           class="authorsInput"
-          placeholder="请输入作者名称"
-          v-model="author"
+          placeholder="点击输入作者"
+          v-model="addForm.author"
         />
       </div>
+      <div id="toolbar-container" class="toolbar"></div>
       <div class="saveButton">
         <el-button type="success" @click="saveEdit">保存</el-button>
       </div>
-      <div id="toolbar-container" class="toolbar"></div>
     </div>
   </div>
 </template>
@@ -51,10 +51,12 @@ export default {
       editor: "",
       htmltext: "<p>用 JS 设置的内容</p><p>追加的内容</p>",
       fileUrl: "",
-      author: "",
-      title: "",
-      actionUrl: "admin/upload/img"
-    };
+      addForm: {
+        author: "",
+        title: "",
+      },
+      actionUrl: "admin/upload/img",
+    }
   },
   mounted() {
     this.getEdit();
@@ -127,8 +129,8 @@ export default {
       }),
 
       this.editor.create();
-      this.editor.txt.html("<p>用 JS 设置的内容</p>"); // 重新设置编辑器内容
-      this.editor.txt.append("<p>追加的内容</p>");
+      this.editor.txt.html("<p></p>"); // 重新设置编辑器内容
+      this.editor.txt.append("<p></p>");
       console.log(this.editor.txt.html());
     },
     async saveEdit() {
@@ -136,15 +138,16 @@ export default {
       const createData =
         new Date().toLocaleDateString() + "T" + new Date().toTimeString();
       var data = {
-        id: 1,
+        //id: 1,
         sortId: 1,
-        title: this.title,
+        title: this.title ||'暂无',
         fileUrl: null,
         faceUrl: this.fileUrl,
-        author: this.author,
+        author: this.author ||'游客',
         content: edt,
-        createTime: createData,
-        updateTime: "2021-08-30T16:00:00.000+00:00",
+        type:0,
+        //createTime: createData,
+        //updateTime: "2021-08-30T16:00:00.000+00:00",
         status: 1
       };
       // $ajax请求
@@ -156,6 +159,7 @@ export default {
           console.log(res);
           if (data.code === "000000") {
             this.$message.success("保存成功");
+            this.$router.push({ path: 'read'});
           } else {
             this.$message.error("暂无权限");
           }
@@ -232,23 +236,30 @@ export default {
   display: block;
 }
 .title {
-  margin: 20px 0;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
 .titleInput {
-  padding: 0 15px;
+  padding-left: 10px;
+  padding-right: 20px;
   height: 40px;
-  width: 300px;
-  font-size: 25px;
-}
-.authorsInput {
-  padding: 0 15px;
-  height: 30px;
-  width: 150px;
+  width: 95%;
   font-size: 18px;
 }
-.saveButton {
-  /* margin-left: 80% */
-  margin-bottom: 10px;
+.authorsInput {
+  padding-left: 10px;
+  padding-right: 20px;
+  height: 40px;
+  width: 95%;
+  font-size: 18px;
+}
+.el-button {
+  display: flex;
+  margin: 0 auto;
+  margin-top: 20px;
+  width:75px;
+  height: 35px;
 }
 /* table 样式 */
 table {

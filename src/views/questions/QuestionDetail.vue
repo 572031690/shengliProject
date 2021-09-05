@@ -45,7 +45,7 @@
       <div class="bodyleft">
         <div class="leftbox">
           <div class="leftboxbutton">
-            <el-button type="primary">我要回答</el-button>
+            <!-- <el-button type="primary">我要回答</el-button> -->
             <el-button type="primary">我要提问</el-button>
           </div>
         </div>
@@ -92,7 +92,7 @@ export default {
         quizId: this.$route.params.id
       };
       // $ajax请求
-      const url = "quiz/getAnswerList";
+      const url = "answer/getAnswerList";
       await this.$ajax
         .get(url, { params })
         .then(res => {
@@ -195,7 +195,7 @@ export default {
 .leftbox {
   margin-left: 20px;
   padding: 50px 10px;
-  height: 120px;
+  height: 70px;
   border-radius: 20px;
   background-color: #fff;
 }

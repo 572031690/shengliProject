@@ -3,6 +3,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Write from '../views/author/authors.vue'
 import quesDetail from '../views/questions/QuestionDetail.vue'
+import putQuestion from '../views/questions/putQuestion.vue'
 
 const Home = () => import('../views/home/Home')
 
@@ -28,6 +29,10 @@ const routes = [
   {
     path: '/write',
     component: Write
+  },
+  {
+    path: '/putQuestion',
+    component: putQuestion
   },
   // {
   //   path: '/home',

@@ -28,8 +28,8 @@
       <div class="bodyleft">
         <div class="leftbox">
           <div class="leftboxbutton">
-            <el-button type="primary">我要回答</el-button>
-            <el-button type="primary">我要提问</el-button>
+            <!-- <el-button type="primary">我要回答</el-button> -->
+            <el-button type="primary"  @click="gotoQuestion">我要提问</el-button>
           </div>
         </div>
       </div>
@@ -69,13 +69,22 @@ export default {
     this.getData();
   },
   methods: {
+    gotoQuestion(){
+      const adminname = window.sessionStorage.getItem('storeName') // 获取浏览器缓存值
+      if(!adminname) this.$router.push({ path: '/putQuestion' }) // 页面跳转
+      else {
+        this.$router.push({ path: 'login' })
+        this.$store.commit("ChangeActive",5);
+        this.$message.error('请先登录！')
+      }
+    },
     async getData() {
       var params = {
         pageNum:this.condition.pageNum,
         pageSize:10
       };
       // $ajax请求
-      const url = "quiz/getAnswerList";
+      const url = "answer/getAnswerList";
       await this.$ajax
         .get(url, {params})
         .then(res => {
@@ -165,7 +174,7 @@ export default {
 .leftbox {
   margin-left: 20px;
   padding: 50px 10px;
-  height: 120px;
+  height: 70px;
   border-radius: 20px;
   background-color: #fff;
 }

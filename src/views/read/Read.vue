@@ -12,6 +12,7 @@
       >
         <div class="list_l">
           <img :src="item.faceUrl" alt="图片" v-if="item.faceUrl" />
+          <img src="../../assets/img/1.jpg" alt="图片" v-else />
         </div>
         <div class="list_r">
           <div class="list_r_t">
@@ -26,21 +27,20 @@
       </div>
       <!-- <div v-html="htmltext" class="centerBody"></div> -->
       <!-- 分页 -->
-      <el-pagination
-        v-if="fileList.length"
-        class="common-page-pagination"
-        background
-        :current-page="condition.pageNum"
-        :page-sizes="[10, 20, 30, 50]"
-        :page-size="condition.pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      />
-    </div>
-    <div class="toWrite">
+      <div class="pagination">
+        <el-pagination
+          v-if="fileList.length"
+          background
+          :current-page="condition.pageNum"
+          :page-size="condition.pageSize"
+          layout="prev, pager, next"
+          :total="total"
+          @current-change="handleCurrentChange"
+        />
+      </div>
+      <div class="toWrite">
       <el-button type="primary" @click="gotoWrite">去写文章</el-button>
+    </div>
     </div>
   </div>
 </template>
@@ -77,21 +77,15 @@ export default {
         this.$router.push({ path: url, query });
       }
     },
-    handleSizeChange(val) {
-      this.condition.pageSize = val;
-      this.getEdits();
-    },
+
     handleCurrentChange(val) {
       this.condition.pageNum = val;
       this.getEdits();
     },
-    async getEdits(current) {
-      if (current) {
-        this.condition.pageNum = current;
-      }
+    async getEdits() {
       var params = {
-        pageNum: 1,
-        pageSize: 10
+        pageNum: this.condition.pageNum,
+        pageSize: 7
       };
       // $ajax请求
       const url = "/essay/getEssayList";
@@ -104,6 +98,8 @@ export default {
             //this.$message.success('请求成功')
             this.fileList = data.data.results;
             this.total = data.data.totalRecord;
+            this.condition.pageNum = data.data.pageNum || 0
+            this.condition.pageSize = data.data.pageSize || 0
             var text = "";
             data.data.results.forEach(item => {
               text += item.content;
@@ -134,20 +130,18 @@ export default {
 #box {
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
-  background: #eee;
-  position: relative;
-
+  padding-top: 10px;
+  margin: 0 auto;
+  background-color: rgb(243, 244, 245);
 }
-
 #article {
   border-radius: 5px;
   width: 50%;
-  margin: 10px auto;
-  margin-top: 20px;
+  /* margin: 10px auto; */
+  /* margin-top: 20px; */
   margin-bottom: 20px;
-  background: #fff;
+  margin-left:12%;
+  /* background: #fff; */
 }
 .centerBody {
   width: 500px;
@@ -165,10 +159,13 @@ export default {
   display: flex;
   width: 80%;
   height: 100px;
-  padding: 10px;
+  padding: 20px;
   margin: 0 auto;
   /* border: 1px solid pink; */
   margin-top: 10px;
+  border-radius: 20px;
+  background: #fff;
+  margin-bottom: 20px;
 }
 .list_l {
   width: 100px;
@@ -221,19 +218,29 @@ img {
   color: #666;
   font-weight: 400;
 }
-
-
-.toWrite{
-  display: flex;
-  position: fixed;
-  height: 10%;
-  width: 10%;
-  top: 10%;
-  right: 10%;
+.pagination {
+  width: calc(100% - 60px);
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  border-radius: 20px;
   background-color: #fff;
-  border-radius: 5px;
-  align-items: center;
-  justify-content: center;
-
+}
+.toWrite{
+  position: absolute;
+  top: 80px;
+  right: 22%;
+  /* margin-left: 20px;
+  margin-bottom: 100px; */
+  padding: 50px 10px;
+  text-align: center;
+  width: 17%;
+  height: 70px;
+  border-radius: 20px;
+  background-color: #fff;
+}
+.el-button {
+  width: 150px;
+  height: 50px;
 }
 </style>
