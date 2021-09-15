@@ -1,7 +1,6 @@
 <template>
   <div>
      <div class="nav">
-
        <el-menu
           :default-active="$store.state.activeIndex"
           class="el-menu-demo"
@@ -15,17 +14,11 @@
           <el-menu-item index="4" @click="itemclick4">测试</el-menu-item>
           <el-menu-item index="5" @click="itemclick5">登录/注册</el-menu-item>
         </el-menu>
-
      </div>
-
   </div>
 </template>
-
 <script>
-
-
 export default {
-
   name: "navbar",
   data() {
     return {
@@ -53,16 +46,13 @@ export default {
 
 };
 </script>
-
 <style scoped>
 .nav{
-
   margin: 0 auto;
   /* background-color: rgba(217, 221, 221, 0.918);
    */
    /* background-color: #5880A9; */
   padding: 0;
-
 
 }
 .nav>.el-menu{
@@ -70,6 +60,5 @@ export default {
   margin: 0 auto;
   /* background-color: rgba(217, 221, 221, 0.918); */
 }
-
 </style>
 
