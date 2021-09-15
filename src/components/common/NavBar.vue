@@ -1,6 +1,7 @@
 <template>
   <div>
      <div class="nav">
+
        <el-menu
           :default-active="$store.state.activeIndex"
           class="el-menu-demo"
@@ -8,10 +9,9 @@
           text-color="#000000"
           active-text-color="#444444"
         >
-          <div class="icon_title">幸运星</div>
           <el-menu-item index="1" @click="itemclick">首页</el-menu-item>
           <el-menu-item index="2" @click="itemclick2">阅读</el-menu-item>
-          <el-menu-item index="3" @click="itemclick3">倾诉</el-menu-item>
+          <el-menu-item index="3" @click="itemclick3">问答</el-menu-item>
           <el-menu-item index="4" @click="itemclick4">测试</el-menu-item>
           <el-menu-item index="5" @click="itemclick5">登录/注册</el-menu-item>
         </el-menu>
@@ -56,7 +56,7 @@ export default {
 
 <style scoped>
 .nav{
-  position: relative;
+
   margin: 0 auto;
   /* background-color: rgba(217, 221, 221, 0.918);
    */
@@ -64,15 +64,6 @@ export default {
   padding: 0;
 
 
-}
-.icon_title {
-  position: absolute;
-  left: -150px;
-  top: 15px;
-  font-size: 32px;
-  font-weight: 700;
-  font-family: "宋体";
-  color: #666;
 }
 .nav>.el-menu{
   width: 400px;
