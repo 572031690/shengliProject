@@ -8,9 +8,12 @@
           text-color="#000000"
           active-text-color="#444444"
         >
+       <div class="logo">
+         幸运星
+       </div>
           <el-menu-item index="1" @click="itemclick">首页</el-menu-item>
           <el-menu-item index="2" @click="itemclick2">阅读</el-menu-item>
-          <el-menu-item index="3" @click="itemclick3">问答</el-menu-item>
+          <el-menu-item index="3" @click="itemclick3">倾诉</el-menu-item>
           <el-menu-item index="4" @click="itemclick4">测试</el-menu-item>
           <el-menu-item index="5" @click="itemclick5">登录/注册</el-menu-item>
         </el-menu>
@@ -47,13 +50,24 @@ export default {
 };
 </script>
 <style scoped>
+
 .nav{
+  position: relative;
   margin: 0 auto;
   /* background-color: rgba(217, 221, 221, 0.918);
    */
    /* background-color: #5880A9; */
   padding: 0;
 
+}
+.logo {
+  position: absolute;
+  color: #596368;
+  font-weight: 600;
+  font-size: 30px;
+  left: -150px;
+  top: 15px;
+  font-family: '宋体';
 }
 .nav>.el-menu{
   width: 400px;

@@ -29,7 +29,7 @@
         <div class="leftbox">
           <div class="leftboxbutton">
             <!-- <el-button type="primary">我要回答</el-button> -->
-            <el-button type="primary"  @click="gotoQuestion">我要提问</el-button>
+            <el-button type="primary"  @click="gotoQuestion">我要倾诉</el-button>
           </div>
         </div>
       </div>
